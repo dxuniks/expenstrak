@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<link rel="stylesheet" type="text/css" href="css/general.css"></link>
+<link rel="stylesheet" href="css/jquery-ui.css"></link>
+<title>Transaction Form</title>
+</head>
+<body>
+    <h2 class="demoHeaders">Transaction Management</h2>
+	<div id="accordion" style="width: 75%">
+	    <h3>Search</h3>
+		    <div class="controlgroup">
+		        <fieldset>
+		            <legend>Search Transactions</legend>
+		            <form action="searchTransaction" method="post">
+		                <select id="category" name="category">
+		                    <option value="-999">All Categories</option>
+		                    <option th:each="Category : ${Categories}" th:value="${Category.id}" th:text="${Category.name}">name</option>
+		                </select>
+		      
+		                <select id="account" name="account">
+		                    <option value="-999">All Accounts</option>
+		                    <option th:each="Account : ${Accounts}" th:value="${Account.id}" th:text="${Account.name}">name</option>
+		                </select>
+		                           
+		                <select id="user" name="user">
+		                    <option value="-999">All Users</option>
+		                    <option th:each="User : ${Users}" th:value="${User.id}" th:text="${User.firstName + ' ' + User.lastName}">name</option>
+		                </select>
+		                <br/>
+		                <input id="startdatepicker" type="text" name="startDate" />
+		                <input id="enddatepicker" type="text" name="endDate" />
+		                <input class="button" type="submit" name="action" value="Search"/>
+		                <input class="button" type="submit" name="action" value="All"/>
+		            </form>
+		          </fieldset>       
+		    </div>
+	    <h3>Add</h3>
+		    <div class="controlgroup">
+		      <fieldset>
+		          <legend>Add Transactions</legend>
+		              <form action="addTransaction" method="post">
+	                    <select id="category" name="category">
+                            <option th:each="Category : ${Categories}" th:value="${Category.id}" th:text="${Category.name}">name</option>
+                        </select>             
+                        <select id="account" name="account">
+                            <option th:each="Account : ${Accounts}" th:value="${Account.id}" th:text="${Account.name}">name</option>
+                        </select>                 
+                        <select id="user" name="user">
+                            <option th:each="User : ${Users}" th:value="${User.id}" th:text="${User.firstName + ' ' + User.lastName}">name</option>
+                        </select>
+                        <br/>
+                        <input type="number" name="amount" onchange="setTwoNumberDecimal"  step="0.01" value="0.00" />
+                        <input id="transdatepicker" type="text" name="transactionDate" />
+                        <input id="desctext" type="text" name="description" value="description"/>
+                        <input class="button" type="submit" name="Add" value="Add Transaction"/>
+                    </form>
+		      </fieldset>
+		    </div>
+	</div>
+    <br/>
+    
+    <div id="listTransactions">
+        <table id="meta">
+        <tr>
+            <th>Date</th>
+            <th>Account</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>User</th>
+        </tr>
+        <tr th:each="Transaction : ${Transactions}">
+            <td th:text="${Transaction.transactionDate}">date</td>
+            <td th:text="${Transaction.account.name}">account</td>          
+            <td th:text="${Transaction.category.name}"></td>
+            <td th:text="${Transaction.amount}"></td>
+            <td th:text="${Transaction.description}"></td>
+            <td th:text="${Transaction.User.firstName + ' ' + Transaction.User.lastName}">user</td>
+            
+        </tr>
+    </table>
+    
+    </div>
+    
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.js"></script>
+	<script>
+
+	   
+	  $(document).ready(function() {
+	       $( "#accordion" ).accordion();
+	       $( "#startdatepicker" ).datepicker().datepicker("setDate", -30);
+           $( "#enddatepicker" ).datepicker().datepicker("setDate", new Date());
+	      	      
+           $( "#transdatepicker" ).datepicker({
+        	   showButtonPanel: true,
+           }).datepicker("setDate", new Date());
+           
+	       $( ".selectmenu" ).selectmenu();
+	       
+	       $( ".button" ).button();
+	       
+	       $( "#button-icon-search" ).button({
+	             icon: "ui-icon-gear",
+	             showLabel: true
+	         });
+	       
+	       $( ".spinner" ).spinner();
+	       
+	       $( ".controlgroup" ).controlgroup();
+	       
+	       
+	  });
+	  
+	  
+	  function setTwoNumberDecimal(event) {
+		    this.value = parseFloat(this.value).toFixed(2);
+		}
+	  
+
+	  
+	</script>    
+</body>
+</html>

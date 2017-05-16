@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="css/general.css"></link>
+<link rel="stylesheet" href="css/jquery-ui.css"></link>
+<title>Meta Data</title>
+</head>
+<body>
+<div>
+    <table id="meta">
+        <tr>
+            <th>Account Name</th>
+            <th>Account Description</th>
+        </tr>
+	    <tr th:each="Account : ${Accounts}">
+	        <td th:text="${Account.name}">Account name</td>
+	        <td th:text="${Account.description}">Account Description</td>
+	    </tr>
+    </table><br/>
+    <button class="button" id="btnAddAccount">Add Account</button>
+ </div>
+<br/><br/>
+ <div id="UserList">   
+    <form action="changeUser" method="post" >
+	    <table id="meta">
+	        <tr>
+	            <th>Name</th>
+	            <th>Email</th>
+	            <th>action</th>
+	        </tr>
+		    <tr th:each="User : ${Users}">
+	            <td th:text="${User.firstName + ' ' + User.lastName}">User Name</td>
+		        <td th:text="${User.emailAddress}">Email</td>
+		    </tr>
+	    </table><br/>
+    </form>
+    <button class="button" id="btnAddUser">Add User</button>
+  </div>
+  <br/><br/>
+
+  <div id="CategoryList">  
+    <table id="meta">
+        <tr>
+            <th>Category Name</th>
+            <th>Category Description</th>
+        </tr>
+	    <tr th:each="Catetory : ${Categories}">
+	        <td th:text="${Catetory.name}">Category name</td>
+	        <td th:text="${Catetory.description}">Category Description</td>
+	    </tr>
+    </table><br/>
+    <button class="button" id="btnAddCategory">Add Category</button>
+  </div>
+<br/><br/>
+
+    <div id="dlgAddAccount" title="Add New Account">
+        <form action="addaccount" method="post">
+            Account User:<br/>
+            <select  id="user" name="user">
+                 <option th:each="User : ${Users}" th:value="${User.id}" th:text="${User.firstName + ' ' + User.lastName}">name</option>
+            </select> <br/><br/>
+            Account Name:<br/>
+            <input type="text" name="name"/><br/><br/>
+            Account Description:<br/>
+            <input type="text" name="description"/><br/><br/>
+            <input class="button" type="submit" value="Add"/>
+        </form>
+    </div> 
+    
+    <div id="dlgAddUser" title="Add New User">
+        <form action="adduser" method="post">
+            Last Name:<br/>
+            <input type="text" name="lastname"/><br/><br/>
+            First Name:<br/>
+            <input type="text" name="firstname"/><br/><br/>
+            Email:<br/>
+            <input type="text" name="email"/><br/><br/>
+            <input class="button" type="submit" value="Add"/>
+        </form>
+    </div>
+    
+	<div id="dlgAddCategory" title="Add New Category">
+        <form action="addcategory" method="post">
+            Category Name:<br/>
+            <input type="text" name="name"/><br/><br/>
+            Category Description:<br/>
+            <input type="text" name="description"/><br/><br/>
+            <input class="button" type="submit" value="Add"/>
+        </form>
+	</div>
+
+    <script>
+    
+    function addCategory() {
+        $("#dlgAddCategory").dialog("open");
+    }
+    
+    function addAccount() {
+        $("#dlgAddAccount").dialog("open");
+    }
+    
+    function addUser() {
+        $("#dlgAddUser").dialog("open");
+    }
+    
+    $(document).ready(function() {
+    	
+        $( ".button" ).button();
+        $( ".selectmenu" ).selectmenu();
+        
+    	$("#dlgAddCategory").dialog( {
+    		autoOpen  :   false,
+    		model     :   true,
+    		show      :   "blind",
+    		hide      :   "blind"
+    	});
+
+        $("#dlgAddAccount").dialog( {
+            autoOpen  :   false,
+            model     :   true,
+            show      :   "blind",
+            hide      :   "blind"
+        });
+        
+        $("#dlgAddUser").dialog( {
+            autoOpen  :   false,
+            model     :   true,
+            show      :   "fade",
+            hide      :   "fade"
+        });
+
+        $( "#btnAddUser" ).click(function () {addUser()});
+        $( "#btnAddAccount" ).click(function () {addAccount()});
+    	$( "#btnAddCategory" ).click(function () {addCategory()});
+    	
+    });
+    
+
+    
+    </script> 
+</body>
+</html>

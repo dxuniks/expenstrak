@@ -1,0 +1,86 @@
+@CHARSET "UTF-8";
+
+
+.maindisplay {
+    width: 80%;
+    height: 200px;
+    margin: auto;
+    padding: 10px;
+}
+.datapanelleft {
+    width: 75%;
+    height: 200px;
+    float: left;
+}
+.chartpanelright {
+    margin-left: 15%;
+    height: 200px;
+
+}
+
+#meta {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#meta td, #meta th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#meta tr:nth-child(even){background-color: #f2f2f2;}
+
+#meta tr:hover {background-color: #ddd;}
+
+#meta th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.restTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+.restTable td, .restTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.restTable tr:nth-child(even){background-color: #f2f2f2;}
+
+.restTable tr:hover {background-color: #ddd;}
+
+.restTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.title {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+tr .edit {
+	display: none;
+}
+
+tr.edit .edit {
+	display: initial;
+}
+
+tr.edit .noedit {
+    display: none;
+}
+
+#monthdatepicker .ui-datepicker-calendar {
+    display: none;
+}

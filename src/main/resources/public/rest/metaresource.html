@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"></meta>
+<script src="../js/jquery.js"></script>
+<script src="../js/mustache.js"></script>
+<script src="../js/jquery-ui.js"></script>
+<script src="../js/meta.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/general.css"></link>
+<link rel="stylesheet" href="../css/jquery-ui.css"></link>
+<title>Meta Info</title>
+</head>
+<body>
+    <div id="categoryList">
+        <h3 class="title">Set Up Categorys &nbsp;&nbsp;&nbsp;&nbsp;<a href="./transactionlist.html">transactions</a>
+        </h3>
+        <button class="button" id="btnAddCategoryDlg">Add Category</button>
+        <table class="restTable" id="categoryTable">
+            <!-- tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>action</th>
+            </tr-->
+            <template id="category-template">
+            <tr>
+                <td>
+                    <span class="noedit name">{{name}}</span>
+                    <input class="edit name"/>
+                </td>
+                <td>
+                    <span class="noedit description">{{description}}</span>
+                    <input class="edit description"/>
+                </td>
+                <td>
+                    <button class="button deleteCategory" category-id="{{id}}">Delete</button>
+                    <button class="button editCategory noedit" category-id="{{id}}">Edit</button>
+                    <button class="button saveEditCategory edit" category-id="{{id}}">Save</button>
+                    <button class="button cancelEditCategory edit" category-id="{{id}}">Cancel</button>                    
+                </td>
+            </tr>
+            </template>
+        </table><br/>
+    </div>
+    <br/><br/>
+      
+    <div id="dlgAddCategory" title="Add New Category">
+        Name:<br/>
+        <input type="text" id="name"/><br/><br/>
+        Description:<br/>
+        <input type="text" id="description"/><br/><br/>
+        <input class="button" id="btnAddCategory" type="submit" value="Add"/>
+    </div>
+    
+    
+    <div id="AccountList">
+        <h3 class="title">Set Up accounts</h3>
+        <button class="button" id="btnAddAccoutDlg">Add account</button>
+        <table class="restTable" id="accountTable">
+            <!-- tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>User</th>
+                <th>Action</th>
+            </tr-->
+            <template id="account-template">
+            <tr>
+                <td>
+                    <span class="noedit name">{{name}}</span>
+                    <input class="edit name"/>
+                </td>
+                <td>
+                    <span class="noedit description">{{description}}</span>
+                    <input class="edit description"/>
+                </td>
+                <td id="user" user-id="{{user.id}}">
+                    <span class="noedit user">{{user.firstName}} {{user.lastName}}</span>
+			        <select class="edit user" id="accountEditUserList" name="user" pre-value="{{user.id}}">
+			        </select>
+                </td> 
+                <td>
+                    <button class="button deleteAccount" account-id="{{id}}">Delete</button>
+                    <button class="button editAccount noedit" account-id="{{id}}">Edit</button>
+                    <button class="button saveEditAccount edit" account-id="{{id}}">Save</button>
+                    <button class="button cancelEditAccount edit" account-id="{{id}}">Cancel</button>
+                    
+                </td>
+            </tr>
+            </template>
+        </table><br/>
+    </div>
+ 
+     <div id="dlgAddAccount" title="Add New Account">
+        Account Name:<br/>
+        <input type="text" id="name"/><br/><br/>
+        Account Description:<br/>
+        <input type="text" id="description"/><br/><br/>
+        Account User:<br/>
+        <select  id="userList" name="user">
+            <template id="user-dropdown-template">
+                <option value="{{id}}" user-firstname="{{firstName}}" user-lastname="{{lastName}}" 
+                    user-emailAddress="{{emailAddress}}">
+                    {{firstName}} {{lastName}}
+                </option>>
+            </template>
+        </select><br/><br/>
+        <input class="button" id="btnAddAccount" type="submit" value="Add"/>
+    </div>
+       
+    <br/><br/>
+    
+    <div id="UserList">
+        <h3 class="title">Set Up Users</h3>
+        <button class="button" id="btnAddUserDlg">Add User</button>
+        <table class="restTable" id="userTable">
+            <!-- tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>action</th>
+            </tr-->
+            <template id="user-template">
+            <tr>
+                <td>
+                    <span class="noedit firstName">{{firstName}}</span>
+                    <input class="edit firstName"/>
+                </td>
+                <td>
+                    <span class="noedit lastName">{{lastName}}</span>
+                    <input class="edit lastName"/>
+                </td>
+                <td>
+                    <span class="noedit emailAddress">{{emailAddress}}</span>
+                    <input class="edit emailAddress"/>
+                </td> 
+                <td>
+                    <button class="button deleteUser" user-id="{{id}}">Delete</button>
+                    <button class="button editUser noedit" user-id="{{id}}">Edit</button>
+                    <button class="button saveEditUser edit" user-id="{{id}}">Save</button>
+                    <button class="button cancelEditUser edit" user-id="{{id}}">Cancel</button>
+                    
+                </td>
+            </tr>
+            </template>
+        </table><br/>
+	</div>
+    <br/><br/>
+      
+    <div id="dlgAddUser" title="Add New User">
+        Last Name:<br/>
+        <input type="text" id="lastName"/><br/><br/>
+        First Name:<br/>
+        <input type="text" id="firstName"/><br/><br/>
+        Email:<br/>
+        <input type="text" id="emailAddress"/><br/><br/>
+        <input class="button" id="btnAddUser" type="submit" value="Add"/>
+    </div>
+
+
+    
+</body>
+</html>

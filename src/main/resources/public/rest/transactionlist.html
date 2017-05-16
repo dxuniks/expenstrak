@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8"></meta>
+<script src="../js/jquery.js"></script>
+<script src="../js/mustache.js"></script>
+<script src="../js/jquery-ui.js"></script>
+<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="excanvas.js"></script><![endif]-->
+<script language="javascript" type="text/javascript" src="../js/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="../js/plugins/jqplot.pieRenderer.min.js"></script>
+<script type="text/javascript" src="../js/plugins/jqplot.highlighter.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/jquery.jqplot.css" />
+
+<script src="../js/transaction.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/general.css"></link>
+<link rel="stylesheet" href="../css/jquery-ui.css"></link>
+<title>transactions</title>
+</head>
+<body>
+    <h3 class="title">Transactions &nbsp;&nbsp;&nbsp;&nbsp;<a href="./metaresource.html">meta setup</a></h3>
+
+	<div id="transactionTabs">
+	  <ul>
+	    <li><a href="#tabAdd">Add</a></li>
+	    <li><a href="#tabSearch">Search</a></li>
+	    <li><a href="#tabBrowse">Browse</a></li>
+	  </ul>
+	  <div id="tabAdd">
+        Amount: <input type="number" id="amount" onchange="setTwoNumberDecimal"  step="0.01" value="0.00" />
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        Date: <input id="transdatepicker" type="text" name="transactionDate" /> 
+        <br/><br/>
+        Description: <input id="desctext" type="text" name="description" maxlength="100" size="50"/>
+        <br/><br/>
+        <select class="add selectCategory">
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <select  class="add selectAccount">
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;      
+        <select  class="add selectUser">
+        </select>        
+        <br/><br/>
+        <button id="btnAddTransaction" class="button">Add</button>
+	  </div>
+	  <div id="tabSearch">
+		<select class="search selectCategory" allValue="Yes">	
+		</select> 
+		&nbsp;&nbsp;&nbsp;&nbsp;  	
+	    <select class="search selectAccount" allValue="Yes">
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;                             
+        <select class="search selectUser" allValue="Yes">
+        </select>
+        <br/><br/>
+        <lable>From: </lable><input id="startdatepicker" type="text" name="startDate" />
+        <lable>To: </lable><input id="enddatepicker" type="text" name="endDate" />
+        <br/><br/>
+        <button class="button" id="btnSearchTransactions">Search</button>
+        <button class="button" id="btnAllTransactions">All</button>	    
+	  </div>
+	     <div id="tabBrowse">
+            <lable>Month: </lable><input id="monthdatepicker"/>
+            <br/><br/>
+            <button class="button" id="btnBrowseTransactions">Browse</button>
+      </div>
+	  
+	</div>
+ 
+    <session class="maindisplay">
+    <div class="datapanelleft">
+    <div id="TransactionList">
+
+        <table class="restTable" id="transactionTable">
+            <tr class='header'>
+                <th>Date</th>
+                <th>Transaction</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>User</th>
+                <th>Action</td>
+            </tr>
+            <template id="transaction-template">
+            <tr>
+                <td>
+                    <span class="noedit date">{{transactionDate}}</span>
+                    <input id="transactionEditDatepicker" class="edit date" type="text" />
+                </td>
+                 <td id="account" account-id="{{account.id}}">
+                    <span class="noedit account">{{account.name}}</span>
+                    <select class="edit account" id="transactionEditAccountList" name="account" preValue="{{account.id}}">
+                    </select>
+                </td>
+                <td id="category" category-id="{{category.id}}">
+                    <span class="noedit category">{{category.name}}</span>
+                    <select class="edit category" id="transactionEditCategoryList" name="category" preValue="{{category.id}}">
+                    </select>
+                </td>
+                <td>
+                    <span class="noedit amount">{{amount}}</span>
+                    <input class="edit amount" onchange="setTwoNumberDecimal"  step="0.01"/>
+                </td>                                  
+                <td>
+                    <span class="noedit description">{{description}}</span>
+                    <input class="edit description"/>
+                </td>
+                <td id="user" user-id="{{user.id}}">
+                    <span class="noedit user">{{user.firstName}} {{user.lastName}}</span>
+                    <select class="edit user" id="transactionEditUserList" name="user" preValue="{{user.id}}">
+                    </select>
+                </td> 
+                <td>
+                    <button class="button deleteTransaction" transaction-id="{{id}}">Delete</button>
+                    <button class="button editTransaction noedit" transaction-id="{{id}}">Edit</button>
+                    <button class="button saveEditTransaction edit" transaction-id="{{id}}">Save</button>
+                    <button class="button cancelEditTransaction edit" transaction-id="{{id}}">Cancel</button>
+                    
+                </td>
+            </tr>
+            </template>
+        </table><br/>
+    </div>
+    </div>
+<!--     <div id="monthCatgoryTotalPie" style="height:400px;width:300px; "></div> -->
+    <div class="chartpanelright">
+        <div><h3 id="grandTotal"></h3></div>
+        <div id="monthCatgoryTotalPie" style="width:350px; display: table-cell; color:#000;"></div>
+    </div>
+
+    </session>
+    
+
+</body>
+</html>
